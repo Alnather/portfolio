@@ -15,13 +15,34 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission - replace with actual form handling
-    // You can use services like Formspree, EmailJS, or your own backend
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      // Using Formspree to handle form submissions
+      // Replace YOUR_FORM_ID with your Formspree form ID from https://formspree.io
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        // If Formspree is not configured, fall back to mailto
+        window.location.href = `mailto:ahmedhaniyousef@gmail.com?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.email}`;
+      }
+    } catch {
+      // Fallback to mailto if fetch fails
+      window.location.href = `mailto:ahmedhaniyousef@gmail.com?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.email}`;
+    }
     
-    setSubmitted(true);
     setIsSubmitting(false);
-    setFormData({ name: '', email: '', message: '' });
   };
 
   const handleChange = (
@@ -78,7 +99,7 @@ export default function Contact() {
               </a>
 
               <a
-                href="https://www.linkedin.com/in/ahmed-h-youse"
+                href="https://www.linkedin.com/in/ahmed-h-yousef"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow group"
@@ -94,7 +115,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">LinkedIn</p>
-                  <p className="text-gray-900 font-medium">ahmed-h-youse</p>
+                  <p className="text-gray-900 font-medium">ahmed-h-yousef</p>
                 </div>
               </a>
 

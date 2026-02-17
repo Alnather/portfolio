@@ -1,36 +1,14 @@
+'use client';
+
+import { useState } from 'react';
+
 const experiences = [
-  {
-    type: 'education',
-    title: 'Bachelor of Arts in Computer Science',
-    organization: 'Lake Forest College',
-    period: 'Jan 2022 - Dec 2025',
-    description:
-      'GPA: 3.95. Focused on software engineering, AI, and systems programming.',
-    highlights: [
-      'Coursework: AI, Data Structures & Algorithms, Database Systems, Operating Systems, Software Engineering, Cryptography',
-      '1st Place - Entrepreneurship Venture Design Challenge 2024',
-      '1st Place - Public Policy Challenge 2023',
-      '3rd Place - Planet Forest Hackathon 2025 (ForesterSwap)',
-      'President, Arab Student Association 2024/2025 - Led restructuring, grew community to 50+ members',
-    ],
-  },
-  {
-    type: 'work',
-    title: 'CyberSecurity Intern',
-    organization: 'Lake Forest College',
-    period: 'Jan 2025 - Dec 2025',
-    description:
-      'Conducted threat analysis and security monitoring across college infrastructure.',
-    highlights: [
-      'Managed security for Microsoft 365 and Azure across 2000+ college accounts',
-      'Automated Nessus and Defender reporting, decreasing review time by 25%',
-    ],
-  },
   {
     type: 'work',
     title: 'Programming Intern',
     organization: 'Lake Forest College',
     period: 'May 2025 - Aug 2025',
+    sortDate: '2025-05',
     description:
       'Developed internal tools and improved accessibility compliance workflows.',
     highlights: [
@@ -40,9 +18,23 @@ const experiences = [
   },
   {
     type: 'work',
+    title: 'CyberSecurity Intern',
+    organization: 'Lake Forest College',
+    period: 'Jan 2025 - Dec 2025',
+    sortDate: '2025-01',
+    description:
+      'Conducted threat analysis and security monitoring across college infrastructure.',
+    highlights: [
+      'Managed security for Microsoft 365 and Azure across 2000+ college accounts',
+      'Automated Nessus and Defender reporting, decreasing review time by 25%',
+    ],
+  },
+  {
+    type: 'work',
     title: 'Cloud Networking Specialist',
     organization: 'Habitat For Humanity',
     period: 'Aug 2023 - Dec 2023',
+    sortDate: '2023-08',
     description:
       'Streamlined workflows and technical operations for volunteer teams.',
     highlights: [
@@ -54,6 +46,7 @@ const experiences = [
     title: 'Website Developer',
     organization: 'Haitian American Museum of Chicago',
     period: 'Jan 2023 - May 2023',
+    sortDate: '2023-01',
     description:
       'Rebuilt key site components and optimized the audio archive section.',
     highlights: [
@@ -61,10 +54,27 @@ const experiences = [
     ],
   },
   {
+    type: 'education',
+    title: 'Bachelor of Arts in Computer Science',
+    organization: 'Lake Forest College',
+    period: 'Jan 2022 - Dec 2025',
+    sortDate: '2022-01',
+    description:
+      'GPA: 3.95. Focused on software engineering, AI, and systems programming.',
+    highlights: [
+      'Coursework: AI, Data Structures & Algorithms, Database Systems, Operating Systems, Software Engineering, Cryptography',
+      '1st Place - Entrepreneurship Venture Design Challenge 2024',
+      '1st Place - Public Policy Challenge 2023',
+      '3rd Place - Planet Forest Hackathon 2025 (Boomer)',
+      'President, Arab Student Association 2024/2025 - Led restructuring, grew community to 50+ members',
+    ],
+  },
+  {
     type: 'work',
     title: 'IT System Administrator',
     organization: 'Scissor Films Studio',
     period: 'Jun 2020 - Dec 2021',
+    sortDate: '2020-06',
     description:
       'Managed all technical operations for a remote studio environment.',
     highlights: [
@@ -72,9 +82,41 @@ const experiences = [
       'Set up hardware/software environments supporting 30% more concurrent workloads',
     ],
   },
+  {
+    type: 'education',
+    title: 'Diploma, Computer Science',
+    organization: 'Luminus Technical University College',
+    period: 'Jun 2020 - Dec 2020',
+    sortDate: '2020-06',
+    description:
+      'Intensive 6-month program gaining hands-on experience building full-stack applications with Node.js and various front-end frameworks.',
+    highlights: [
+      'Led a team developing a Netflix-like streaming platform with user features: comments, ratings, and viewing history',
+      'Enhanced project management and full-stack development skills',
+    ],
+  },
+  {
+    type: 'education',
+    title: 'International Baccalaureate, Scientific',
+    organization: 'UWC Changshu China',
+    period: '2018 - 2020',
+    sortDate: '2018-01',
+    description:
+      'International Baccalaureate program focused on scientific studies.',
+    highlights: [],
+  },
 ];
 
+type FilterType = 'all' | 'work' | 'education';
+
 export default function Experience() {
+  const [filter, setFilter] = useState<FilterType>('all');
+
+  const filteredExperiences = experiences.filter((item) => {
+    if (filter === 'all') return true;
+    return item.type === filter;
+  });
+
   return (
     <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
@@ -82,16 +124,50 @@ export default function Experience() {
           Experience & Education
         </h2>
         <div className="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
-        <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+        <p className="text-gray-600 text-center mb-8 max-w-2xl mx-auto">
           My journey in computer science and software development.
         </p>
+
+        {/* Filter Buttons */}
+        <div className="flex justify-center gap-2 mb-12">
+          <button
+            onClick={() => setFilter('all')}
+            className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              filter === 'all'
+                ? 'bg-gray-900 text-white'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            All
+          </button>
+          <button
+            onClick={() => setFilter('work')}
+            className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              filter === 'work'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            Experience
+          </button>
+          <button
+            onClick={() => setFilter('education')}
+            className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              filter === 'education'
+                ? 'bg-green-600 text-white'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            Education
+          </button>
+        </div>
 
         {/* Timeline */}
         <div className="relative">
           {/* Timeline Line */}
           <div className="absolute left-0 md:left-1/2 transform md:-translate-x-px h-full w-0.5 bg-gray-200"></div>
 
-          {experiences.map((item, index) => (
+          {filteredExperiences.map((item, index) => (
             <div
               key={index}
               className={`relative flex items-center mb-8 ${

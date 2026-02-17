@@ -26,7 +26,7 @@ const skillCategories = [
       { name: 'Git/GitHub', level: 90 },
       { name: 'Linux', level: 75 },
       { name: 'TensorFlow', level: 70 },
-      { name: 'Redis', level: 65 },
+      { name: 'AI Development (Claude/ChatGPT)', level: 85 },
     ],
   },
 ];
@@ -39,7 +39,7 @@ const technologies = [
   { name: 'Firebase', icon: '🔥' },
   { name: 'C++', icon: '⚡' },
   { name: 'TensorFlow', icon: '🧠' },
-  { name: 'Linux', icon: '🐧' },
+  { name: 'AI Development', icon: '🤖' },
 ];
 
 export default function Skills() {

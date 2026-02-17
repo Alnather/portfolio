@@ -51,7 +51,7 @@ export default function Hero() {
                 </svg>
               </a>
               <a
-                href="https://www.linkedin.com/in/ahmed-h-youse"
+                href="https://www.linkedin.com/in/ahmed-h-yousef"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-gray-900 transition-colors"
