@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 const projects = [
   {
     title: 'Boomer - Live Campus Platform',
@@ -9,7 +11,7 @@ const projects = [
       'Won 3rd Place at Planet Forest Hackathon at Lake Forest College 2025',
     ],
     tech: ['React', 'Node.js', 'Firebase', 'Tailwind CSS'],
-    image: '/projects/boomer.png',
+    image: '/screengrabs/boomer.png',
     github: 'https://github.com/Alnather/Boomer',
     live: 'https://boomer-ten.vercel.app/',
     featured: true,
@@ -22,7 +24,7 @@ const projects = [
       'Optimized A* pathfinding, reducing computation overhead by 80% on large maps',
     ],
     tech: ['Python', 'C++', 'Behavior Trees', 'A* Algorithm'],
-    image: '/projects/game-ai.png',
+    image: '/screengrabs/gamenavigation.png',
     github: 'https://github.com/alnather',
     live: null,
     featured: true,
@@ -36,7 +38,7 @@ const projects = [
       'Focused on user experience and performance',
     ],
     tech: ['Web Development', 'JavaScript', 'CSS', 'Responsive Design'],
-    image: '/projects/canon.png',
+    image: '/screengrabs/cannon_recruiting.png',
     github: null,
     live: 'https://canonrecruiting.com',
     featured: true,
@@ -49,7 +51,7 @@ const projects = [
       'Improved system uptime to 99% as IT System Administrator',
     ],
     tech: ['Web Development', 'JavaScript', 'CSS', 'Performance'],
-    image: '/projects/scissor.png',
+    image: '/screengrabs/scissorfilms.png',
     github: null,
     live: 'https://www.scissorfilms.com/',
     featured: true,
@@ -60,7 +62,7 @@ const projects = [
       'WordPress portfolio website with custom styling and optimizations for a professional client',
     ],
     tech: ['WordPress', 'PHP', 'CSS', 'SEO'],
-    image: '/projects/marquardt.png',
+    image: '/screengrabs/jamesmarquardt.jpg',
     github: null,
     live: 'https://www.jamesmarquardt.com/',
     featured: false,
@@ -73,7 +75,7 @@ const projects = [
       'Focused on the audio archive section',
     ],
     tech: ['WordPress', 'PHP', 'Performance', 'Audio Integration'],
-    image: '/projects/hamoc.png',
+    image: '/screengrabs/hamoc.png',
     github: null,
     live: 'https://hamoc.org/',
     featured: false,
@@ -86,7 +88,7 @@ const projects = [
       'Integrates with OpenAI API for intelligent responses',
     ],
     tech: ['JavaScript', 'OpenAI API', 'Web Speech API', 'Node.js'],
-    image: '/projects/guitar-helper.png',
+    image: '/screengrabs/guitar_assistant.png',
     github: 'https://github.com/Alnather/guitar-assistant',
     live: null,
     featured: false,
@@ -129,30 +131,41 @@ export default function Projects() {
               >
                 {/* Project Image */}
                 <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-gray-300 rounded-lg mx-auto mb-2 flex items-center justify-center">
-                        <svg
-                          className="w-8 h-8 text-gray-500"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={1.5}
-                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                          />
-                        </svg>
+                  {project.image ? (
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="w-16 h-16 bg-gray-300 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                          <svg
+                            className="w-8 h-8 text-gray-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                            />
+                          </svg>
+                        </div>
                       </div>
-                      {project.comingSoon && (
-                        <span className="inline-block px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">
-                          Coming Soon
-                        </span>
-                      )}
                     </div>
-                  </div>
+                  )}
+                  {project.comingSoon && (
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                      <span className="inline-block px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">
+                        Coming Soon
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Project Info */}
