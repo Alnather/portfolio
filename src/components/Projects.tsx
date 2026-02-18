@@ -44,6 +44,19 @@ const projects = [
     featured: true,
   },
   {
+    title: 'Brand Constellations - Diagnostic Tool',
+    description: [
+      'Brand personality diagnostic tool with 35-question assessment across 7 dimensions',
+      'Custom radar chart visualization for archetype analysis',
+      'Firebase backend with real-time scoring engine',
+    ],
+    tech: ['Next.js 14', 'TypeScript', 'Firebase', 'Tailwind CSS'],
+    image: '/screengrabs/brand_diagnostic.png',
+    github: null,
+    live: 'https://diagnostic.brandconstellations.com/',
+    featured: true,
+  },
+  {
     title: 'Scissor Films Studio',
     description: [
       'Commercial website for a film production studio',
